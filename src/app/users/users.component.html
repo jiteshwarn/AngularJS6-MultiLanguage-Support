@@ -1,12 +1,80 @@
-<h1>Users</h1>
+<div class="search-add-container">
+  <div>
+    <input type="text" class="form-control" name="searchString" placeholder="Type to search customer name..."
+      [(ngModel)]="searchString">
+  </div>
+  <div>
+    <button (click)="openAddDialog('add','tst')" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add
+      More Customer</button>
+  </div>
+</div>
+<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="25">
+  <thead>
+    <tr>
+      <th>
+        <mfDefaultSorter by="edit">Edit </mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="delete">Delete </mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="name">Customer Name</mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="tel">Telephone</mfDefaultSorter>
+      </th>
 
-<ul>
-  <li *ngFor="let user of users$">
-    <a routerLink="/details/{{user.id}}">{{ user.name }}</a>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of mf.data | filter : 'name' : searchString; let i = index">
+      <td><i data-toggle="modal" data-target="#myModal" (click)="onEdit('edit',user)" class="fa fa-edit pointer" style="font-size:24px"></i>
+      </td>
+      <td>
+        <i (click)="onDelete(user,i)" style="font-size:24px" class="fa pointer">&#xf014;</i>
+      </td>
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.tel}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>
 
-    <ul>
-      <li>{{ user.email }}</li>
-      <li><a href="http://{{ user.website }}">{{ user.website }}</a></li>
-    </ul>
-  </li>
-</ul>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          Customer Name : <input [(ngModel)]="name" #ctrl="ngModel" required>
+        </div>
+        <div>
+          Email Id: <input [(ngModel)]="email" #ctrl="ngModel" required>
+        </div>
+        <div>
+          Telephone Number : <input [(ngModel)]="telephone" #ctrl="ngModel" required>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button (click)="addUser()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

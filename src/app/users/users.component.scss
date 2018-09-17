@@ -1,0 +1,10 @@
+.search-add-container {
+    display: flex;
+    justify-content: space-between;
+    input[type=text] {
+        width: 300px;
+    }
+}
+.pointer {
+    cursor: pointer;
+}

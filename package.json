@@ -3,11 +3,20 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start": "ng serve --aot",
+    "start:ja": "ng serve --aot --i18nFile=src/locale/messages.ja.xlf --i18nFormat=xlf --locale=ja",
+    "extract": "ng xi18n --outputPath=src/locale",
+    "start:en": "ng serve --aot --i18nFile=src/locale/messages.en.xlf --i18nFormat=xlf --locale=en",
+    "start:fr": "ng serve --aot --i18nFile=src/locale/messages.fr.xlf --i18nFormat=xlf --locale=fr",
+    "start:de": "ng serve --aot --i18nFile=src/locale/messages.de.xlf --i18nFormat=xlf --locale=de",
+    "start:it": "ng serve --aot --i18nFile=src/locale/messages.it.xlf --i18nFormat=xlf --locale=it",
+    "start:es": "ng serve --aot --i18nFile=src/locale/messages.es.xlf --i18nFormat=xlf --locale=es",
+    "build": "ng build --aot --output-path dist/ --base-href /ng5-i18n-multilingual/",
+    "build:ja": "ng build --aot --output-path dist/ja --base-href /ng5-i18n-multilingual/ja/ --i18nFile=src/locale/messages.ja.xlf --i18nFormat=xlf --locale=ja",
+    "build:fr": "ng build --aot --output-path dist/fr --base-href /ng5-i18n-multilingual/fr/ --i18nFile=src/locale/messages.fr.xlf --i18nFormat=xlf --locale=fr"
   },
   "private": true,
   "dependencies": {
